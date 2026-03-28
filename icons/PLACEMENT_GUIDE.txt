@@ -1,0 +1,123 @@
+═══════════════════════════════════════════════════════════════
+  アイコン・イメージ 配置計画書
+  hojokin-LP / design_parts/icons/
+═══════════════════════════════════════════════════════════════
+
+■ parts_03_reasons.html ── 選ばれる理由（5つ）
+  配置場所：各 .reason-card の .reason-header 内、.reason-num-badge の右隣に新 .reason-icon div を追加
+  サイズ：48px × 48px
+
+  reason_01.svg  → reason-card 1（採択率90%以上）     オレンジ #e8821a  トロフィー
+  reason_02.svg  → reason-card 2（全工程代行）         レッド   #dc3010  チェックサークル
+  reason_03.svg  → reason-card 3（事業計画書メソッド） ブルー   #1e5fa8  ドキュメント
+  reason_04.svg  → reason-card 4（全国オンライン）     ティール #0d8a7a  グローブ
+  reason_05.svg  → reason-card 5（1年間サポート）      パープル #6c3483  カレンダー
+
+  ＜追加位置イメージ＞
+  <div class="reason-header">
+    <div class="reason-num-badge">1</div>
+    [★ ここに <img src="../icons/reason_01.svg" width="48" height="48">]
+    <div class="reason-title">...</div>
+  </div>
+
+───────────────────────────────────────────────────────────────
+
+■ parts_05_benefits.html ── メリット（7つ）
+  配置場所：各 .benefit7-item の .b7-content 上部に新 .b7-icon を追加
+  サイズ：36px × 36px  カラー：ネイビー #0f2d52
+
+  benefit_01.svg → item 1（時間も知識もなくていい）   時計
+  benefit_02.svg → item 2（補助金を逃さない）         ターゲット
+  benefit_03.svg → item 3（自社に合った補助金を提案） 虫眼鏡
+  benefit_04.svg → item 4（採択後も入金まで）         ウォレット
+  benefit_05.svg → item 5（本業に専念できる）         人物
+  benefit_06.svg → item 6（申請データが会社の資産に） データベース
+  benefit_07.svg → item 7（投資にリスクがかかりません）シールド
+
+  ＜追加位置イメージ＞
+  <div class="benefit7-item">
+    <div class="b7-num">1</div>
+    <div class="b7-content">
+      [★ ここに <img src="../icons/benefit_01.svg" width="36" height="36">]
+      <h5>時間も知識もなくていい</h5>
+      <p>...</p>
+    </div>
+  </div>
+
+───────────────────────────────────────────────────────────────
+
+■ parts_06_voices.html ── お客様の声
+  配置場所：各 .voice-card の .vc-quote 部分を SVG に置き換え
+  サイズ：48px × 48px  カラー：オレンジ #e8821a
+
+  quote.svg → 全 voice-card の .vc-quote 内 " の代わりに配置
+
+  ＜追加位置イメージ＞
+  <div class="vc-quote">
+    [★ <img src="../icons/quote.svg" width="48" height="48"> ]
+  </div>
+
+───────────────────────────────────────────────────────────────
+
+■ parts_08_plans.html ── 料金プラン（3プラン）
+  配置場所：各 .plan-head 内、.plan-name の上に追加
+  サイズ：48px × 48px
+
+  plan_01.svg → plan-card 1（サポートコース）         ブルー   #1e5fa8  チャットバブル
+  plan_02.svg → plan-card 2（代行サポートコース 推奨）ホワイト #ffffff  スター（dark bg用）
+  plan_03.svg → plan-card 3（代行コース）             ブルー   #1e5fa8  書類チェック
+
+  ＜追加位置イメージ＞
+  <div class="plan-head">
+    [★ ここに <img src="../icons/plan_01.svg" width="48" height="48">]
+    <div class="plan-name">① サポートコース</div>
+    ...
+  </div>
+
+───────────────────────────────────────────────────────────────
+
+■ parts_09_recommend.html ── こんな方にお任せください（6項目）
+  配置場所：各 .rec-item 内、.rec-content の h4 の直前に追加
+  サイズ：32px × 32px  カラー：ネイビー #0f2d52
+
+  recommend_01.svg → item 1（何から始めればいいかわからない）  ヘルプ？
+  recommend_02.svg → item 2（時間を割けない）                  時計
+  recommend_03.svg → item 3（電子申請に不安）                   PC・モニター
+  recommend_04.svg → item 4（過去に不採択）                    警告
+  recommend_05.svg → item 5（実績報告の対応が難しい）           メール
+  recommend_06.svg → item 6（設備投資・新事業展開を検討中）     ビル
+
+  ＜追加位置イメージ＞
+  <div class="rec-item">
+    <div class="rec-content">
+      [★ <img src="../icons/recommend_01.svg" width="32" height="32" style="margin-bottom:8px;">]
+      <h4>補助金に興味はあるが...</h4>
+      <p>...</p>
+    </div>
+  </div>
+
+───────────────────────────────────────────────────────────────
+
+■ parts_12_cta.html ── CTA・お問い合わせ
+  配置場所：.cta-main 内、見出しの上に追加
+  サイズ：64px × 64px  カラー：ホワイト #ffffff（dark bg用）
+
+  cta_phone.svg → .cta-main の h2 の上に配置
+
+  ＜追加位置イメージ＞
+  <div class="cta-main">
+    [★ <img src="../icons/cta_phone.svg" width="64" height="64" style="margin-bottom:16px;">]
+    <h2>...</h2>
+    ...
+  </div>
+
+═══════════════════════════════════════════════════════════════
+  ※ 既存のアイコンがすでに入っているパーツ
+  - parts_01_headline.html : trust-bar に SVG アイコン済み
+  - parts_04_results.html  : KPI カードにアイコンなし（数字のみ、意図的）
+  - parts_07_comparison.html : テーブル形式（アイコン不要）
+  - parts_10_profile.html  : 写真あり（profile_akutsu.png）
+  - parts_11_faq.html      : Q マーク済み
+  - parts_13_company.html  : テーブル形式（アイコン不要）
+  - parts_00_marunage.html : marunage_flow.svg 配置済み
+═══════════════════════════════════════════════════════════════
