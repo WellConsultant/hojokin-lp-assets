@@ -1,0 +1,696 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>補助金攻略コース LP プレビュー</title><style>
+body{margin:0;padding:0;background:#F5F5F5;}
+#lp-nav{position:fixed;top:0;left:0;width:100%;z-index:9999;background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 1px 4px rgba(0,0,0,0.06);border-bottom:1px solid #EDF2F7;}
+#lp-nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;padding:0 20px;}
+.lp-nav-brand{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:10px 0;margin-right:20px;text-decoration:none;}
+.lp-nav-brand-badge{background:#FF6B35;color:#fff;font-size:9px;font-weight:900;padding:3px 8px;border-radius:3px;letter-spacing:1px;line-height:1;}
+.lp-nav-brand-text{color:#1A3C6E;font-size:13px;font-weight:700;}
+.lp-nav-menu{display:flex;align-items:center;overflow-x:auto;scrollbar-width:none;flex:1;gap:2px;}
+.lp-nav-menu::-webkit-scrollbar{display:none;}
+.lp-nav-link{display:inline-flex;align-items:center;padding:14px 12px;font-size:12px;font-weight:500;color:#A0AEC0;text-decoration:none;white-space:nowrap;position:relative;transition:color 0.25s;font-family:'Noto Sans JP',sans-serif;}
+.lp-nav-link::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%) scaleX(0);width:20px;height:2px;background:#FF6B35;border-radius:1px;transition:transform 0.25s ease;}
+.lp-nav-link:hover{color:#1A3C6E;}
+.lp-nav-link.active{color:#1A3C6E;font-weight:700;}
+.lp-nav-link.active::after{transform:translateX(-50%) scaleX(1);}
+#lp-nav-progress{position:absolute;bottom:0;left:0;height:1px;background:#FF6B35;width:0%;transition:width 0.15s linear;}
+@media(max-width:768px){.lp-nav-brand-text{display:none;}.lp-nav-link{padding:12px 9px;font-size:11px;}#lp-nav-inner{padding:0 10px;}}
+
+/* ========================================
+   補助金攻略コース — LP CSS
+   ======================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+/* --- リセット・ベース --- */
+.lp-wrap {
+  font-family: 'Noto Sans JP', sans-serif !important;
+  color: #333 !important;
+  line-height: 1.8 !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.lp-section {
+  width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  margin-left: -50vw !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: clamp(2rem, 5vw, 4rem) 0 !important;
+  box-sizing: border-box !important;
+}
+
+.lp-inner {
+  max-width: 960px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 0 clamp(1rem, 3vw, 2rem) !important;
+  box-sizing: border-box !important;
+}
+
+.lp-bg-navy { background: linear-gradient(135deg, #1A3C6E 0%, #0F2847 100%) !important; color: #fff !important; }
+.lp-bg-gray { background-color: #F5F5F5 !important; }
+.lp-bg-white { background-color: #FFFFFF !important; }
+.lp-bg-lightnavy { background: linear-gradient(135deg, #EBF0F7 0%, #F0F4F9 100%) !important; }
+
+.lp-heading { text-align: center !important; font-weight: 900 !important; font-size: clamp(1.4rem, 4vw, 2rem) !important; margin-top: 0 !important; margin-bottom: clamp(0.5rem, 2vw, 1rem) !important; line-height: 1.5 !important; }
+.lp-heading-white { color: #fff !important; }
+.lp-heading-navy { color: #1A3C6E !important; }
+.lp-subheading { text-align: center !important; font-size: clamp(0.95rem, 2.5vw, 1.15rem) !important; color: #666 !important; margin-top: 0 !important; margin-bottom: clamp(1rem, 3vw, 2rem) !important; line-height: 1.7 !important; }
+.lp-divider { width: 60px !important; height: 3px !important; background-color: #FF6B35 !important; border: none !important; margin-left: auto !important; margin-right: auto !important; margin-top: clamp(0.5rem, 1.5vw, 1rem) !important; margin-bottom: clamp(1rem, 3vw, 2rem) !important; }
+
+.lp-cta-btn { display: inline-block !important; background-color: #FF6B35 !important; color: #fff !important; font-size: clamp(1rem, 3vw, 1.3rem) !important; font-weight: 700 !important; padding: clamp(0.8rem, 2vw, 1.2rem) clamp(2rem, 5vw, 3rem) !important; border-radius: 8px !important; text-decoration: none !important; text-align: center !important; box-shadow: 0 4px 15px rgba(255,107,53,0.4) !important; transition: transform 0.2s, box-shadow 0.2s !important; border: none !important; cursor: pointer !important; }
+.lp-cta-btn:hover { transform: translateY(-2px) !important; box-shadow: 0 6px 20px rgba(255,107,53,0.5) !important; }
+.lp-cta-wrap { text-align: center !important; margin-top: clamp(1.5rem, 3vw, 2rem) !important; margin-bottom: 0 !important; }
+
+.lp-hero-catch { font-size: clamp(1.6rem, 5vw, 2.8rem) !important; font-weight: 900 !important; text-align: center !important; color: #fff !important; line-height: 1.5 !important; margin-top: 0 !important; margin-bottom: clamp(0.5rem, 2vw, 1rem) !important; }
+.lp-hero-sub { font-size: clamp(1rem, 2.5vw, 1.2rem) !important; text-align: center !important; color: rgba(255,255,255,0.85) !important; margin-top: 0 !important; margin-bottom: clamp(1rem, 3vw, 1.5rem) !important; line-height: 1.7 !important; }
+.lp-hero-price { text-align: center !important; margin-top: clamp(1rem, 2vw, 1.5rem) !important; margin-bottom: clamp(0.5rem, 1vw, 1rem) !important; }
+.lp-price-original { font-size: clamp(0.9rem, 2vw, 1rem) !important; color: rgba(255,255,255,0.6) !important; text-decoration: line-through !important; }
+.lp-price-main { font-size: clamp(2rem, 6vw, 3.5rem) !important; font-weight: 700 !important; color: #FF6B35 !important; }
+.lp-price-note { font-size: clamp(0.8rem, 2vw, 0.95rem) !important; color: rgba(255,255,255,0.7) !important; text-align: center !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+
+.lp-pain-list { max-width: 700px !important; margin-left: auto !important; margin-right: auto !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+.lp-pain-item { display: block !important; width: 100% !important; background: #fff !important; padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1rem, 3vw, 1.5rem) !important; margin-top: 0 !important; margin-bottom: clamp(0.5rem, 1.5vw, 0.8rem) !important; border-radius: 8px !important; font-size: clamp(0.95rem, 2.5vw, 1.05rem) !important; line-height: 1.7 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important; }
+
+.lp-belief { max-width: 700px !important; margin-left: auto !important; margin-right: auto !important; margin-top: 0 !important; margin-bottom: 0 !important; text-align: center !important; }
+.lp-belief-old { font-size: clamp(1.1rem, 3vw, 1.3rem) !important; color: #1A3C6E !important; font-weight: 700 !important; margin-top: clamp(1rem, 2vw, 1.5rem) !important; margin-bottom: clamp(1rem, 2vw, 1.5rem) !important; line-height: 1.7 !important; }
+.lp-belief-turn { font-size: clamp(1.3rem, 4vw, 1.8rem) !important; color: #FF6B35 !important; font-weight: 700 !important; margin-top: clamp(1rem, 2vw, 1.5rem) !important; margin-bottom: clamp(1rem, 2vw, 1.5rem) !important; }
+.lp-belief-new { font-size: clamp(1rem, 2.5vw, 1.15rem) !important; color: #333 !important; line-height: 1.8 !important; margin-top: 0 !important; margin-bottom: clamp(1rem, 2vw, 1.5rem) !important; }
+
+.lp-target-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: clamp(0.8rem, 2vw, 1.2rem) !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+.lp-target-card { display: block !important; width: 100% !important; background: #F5F5F5 !important; padding: clamp(1rem, 3vw, 1.5rem) !important; border-radius: 8px !important; text-align: center !important; font-size: clamp(0.95rem, 2.5vw, 1.05rem) !important; line-height: 1.7 !important; box-sizing: border-box !important; }
+.lp-target-icon { font-size: clamp(1.5rem, 4vw, 2rem) !important; display: block !important; margin-top: 0 !important; margin-bottom: 0.5rem !important; }
+
+.lp-steps { max-width: 700px !important; margin-left: auto !important; margin-right: auto !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+.lp-step { display: block !important; width: 100% !important; background: #fff !important; padding: clamp(1rem, 3vw, 1.5rem) !important; margin-top: 0 !important; margin-bottom: clamp(0.8rem, 2vw, 1rem) !important; border-radius: 8px !important; box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important; box-sizing: border-box !important; }
+.lp-step-num { display: inline-block !important; background-color: #FF6B35 !important; color: #fff !important; font-weight: 700 !important; font-size: clamp(0.8rem, 2vw, 0.9rem) !important; padding: 0.2rem 0.8rem !important; border-radius: 4px !important; margin-top: 0 !important; margin-bottom: 0.5rem !important; }
+.lp-step-title { font-size: clamp(1rem, 2.5vw, 1.15rem) !important; font-weight: 700 !important; color: #1A3C6E !important; margin-top: 0 !important; margin-bottom: 0.3rem !important; display: block !important; width: 100% !important; }
+.lp-step-desc { font-size: clamp(0.9rem, 2.2vw, 1rem) !important; color: #666 !important; margin-top: 0 !important; margin-bottom: 0 !important; display: block !important; width: 100% !important; }
+
+/* --- カテゴリヘッダー＋カードグリッド --- */
+.lp-cat { margin-top: 0 !important; margin-bottom: clamp(2rem, 4vw, 3rem) !important; }
+.lp-cat:last-child { margin-bottom: 0 !important; }
+.lp-cat-header { display: block !important; text-align: center !important; margin-top: 0 !important; margin-bottom: clamp(1rem, 2vw, 1.5rem) !important; }
+.lp-cat-label { display: inline-block !important; background: linear-gradient(135deg, #1A3C6E 0%, #2A5A9E 100%) !important; color: #fff !important; font-size: clamp(0.75rem, 1.8vw, 0.85rem) !important; font-weight: 700 !important; padding: 0.25rem 1rem !important; border-radius: 20px !important; letter-spacing: 0.05em !important; }
+.lp-cat-label-orange { background: linear-gradient(135deg, #FF6B35 0%, #E85D2C 100%) !important; }
+.lp-cat-name { display: block !important; width: 100% !important; text-align: center !important; font-size: clamp(1.2rem, 3.5vw, 1.5rem) !important; font-weight: 900 !important; color: #1A3C6E !important; margin-top: 0.5rem !important; margin-bottom: 0.2rem !important; }
+.lp-cat-stars { display: block !important; width: 100% !important; text-align: center !important; font-size: clamp(0.9rem, 2vw, 1rem) !important; color: #FFB800 !important; margin-top: 0 !important; margin-bottom: 0.2rem !important; letter-spacing: 0.1em !important; }
+.lp-cat-value { display: block !important; width: 100% !important; text-align: center !important; font-size: clamp(1.1rem, 3vw, 1.35rem) !important; font-weight: 700 !important; color: #FF6B35 !important; margin-top: 0 !important; margin-bottom: 0.3rem !important; }
+.lp-cat-sub { display: block !important; width: 100% !important; text-align: center !important; font-size: clamp(0.88rem, 2.2vw, 0.98rem) !important; color: #666 !important; margin-top: 0 !important; margin-bottom: clamp(0.8rem, 2vw, 1.2rem) !important; line-height: 1.7 !important; }
+
+/* --- コンテンツカード（参考LP準拠） --- */
+.lp-card-grid { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important; gap: 16px !important; }
+.lp-card { background: #FFFFFF !important; border-radius: 10px !important; overflow: hidden !important; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03) !important; transition: box-shadow 0.2s !important; }
+.lp-card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.08), 0 8px 20px rgba(0,0,0,0.05) !important; }
+.lp-card-preview { width: 100% !important; height: 100px !important; display: block !important; text-align: center !important; font-size: 2.5rem !important; line-height: 100px !important; }
+.lp-card-preview-blue { background: linear-gradient(135deg, #EDF2F7 0%, #DBEAFE 100%) !important; }
+.lp-card-preview-orange { background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%) !important; }
+.lp-card-preview-green { background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%) !important; }
+.lp-card-preview-purple { background: linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%) !important; }
+.lp-card-icon { display: inline-block !important; font-size: clamp(0.9rem, 2vw, 1.1rem) !important; font-weight: 900 !important; color: #1A3C6E !important; letter-spacing: 1px !important; opacity: 0.6 !important; }
+.lp-card-body { padding: 16px 18px 18px !important; }
+.lp-card-name { font-size: clamp(0.88rem, 2.2vw, 1rem) !important; font-weight: 700 !important; color: #1A3C6E !important; margin-top: 0 !important; margin-bottom: 4px !important; display: block !important; width: 100% !important; }
+.lp-card-count { display: inline-block !important; font-size: clamp(0.7rem, 1.5vw, 0.78rem) !important; color: #FF6B35 !important; font-weight: 700 !important; background: #FFF7ED !important; padding: 1px 8px !important; border-radius: 4px !important; margin-bottom: 4px !important; }
+.lp-card-desc { font-size: clamp(0.8rem, 1.9vw, 0.9rem) !important; color: #718096 !important; line-height: 1.65 !important; margin-top: 0 !important; margin-bottom: 0 !important; display: block !important; width: 100% !important; }
+
+/* --- ワイドカード（AI プロンプト用） --- */
+.lp-features { max-width: 800px !important; margin-left: auto !important; margin-right: auto !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+.lp-feature-item { display: block !important; width: 100% !important; padding: clamp(1rem, 3vw, 1.5rem) !important; margin-top: 0 !important; margin-bottom: clamp(0.8rem, 2vw, 1rem) !important; background: #fff !important; border-left: 4px solid #FF6B35 !important; border-radius: 0 8px 8px 0 !important; box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important; box-sizing: border-box !important; }
+.lp-feature-title { font-size: clamp(1rem, 2.5vw, 1.1rem) !important; font-weight: 700 !important; color: #1A3C6E !important; margin-top: 0 !important; margin-bottom: 0.4rem !important; display: block !important; width: 100% !important; }
+.lp-feature-desc { font-size: clamp(0.9rem, 2.2vw, 1rem) !important; color: #666 !important; line-height: 1.7 !important; margin-top: 0 !important; margin-bottom: 0 !important; display: block !important; width: 100% !important; }
+
+/* --- ボリュームカウンター --- */
+.lp-volume-grid { display: grid !important; grid-template-columns: repeat(4, 1fr) !important; gap: clamp(0.5rem, 1.5vw, 1rem) !important; max-width: 700px !important; margin-left: auto !important; margin-right: auto !important; margin-top: clamp(1rem, 2vw, 1.5rem) !important; margin-bottom: clamp(1.5rem, 3vw, 2rem) !important; }
+.lp-volume-card { display: block !important; width: 100% !important; background: #fff !important; border-radius: 10px !important; padding: clamp(0.8rem, 2vw, 1.2rem) 0.5rem !important; text-align: center !important; box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important; box-sizing: border-box !important; }
+.lp-volume-num { display: block !important; font-size: clamp(1.8rem, 5vw, 2.5rem) !important; font-weight: 900 !important; color: #FF6B35 !important; line-height: 1.2 !important; }
+.lp-volume-unit { display: block !important; font-size: clamp(0.7rem, 1.8vw, 0.82rem) !important; color: #666 !important; margin-top: 0.2rem !important; }
+
+/* --- 見本プレビュー --- */
+.lp-sample-box { display: block !important; width: 100% !important; max-width: 500px !important; margin-left: auto !important; margin-right: auto !important; margin-top: clamp(1rem, 2vw, 1.5rem) !important; margin-bottom: clamp(1rem, 2vw, 1.5rem) !important; background: #fff !important; border-radius: 10px !important; overflow: hidden !important; box-shadow: 0 4px 16px rgba(0,0,0,0.1) !important; cursor: pointer !important; transition: box-shadow 0.2s, transform 0.2s !important; }
+.lp-sample-box:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important; transform: translateY(-2px) !important; }
+.lp-sample-box img { width: 100% !important; height: auto !important; display: block !important; }
+.lp-sample-caption { display: block !important; width: 100% !important; text-align: center !important; padding: 0.6rem !important; font-size: clamp(0.8rem, 2vw, 0.9rem) !important; color: #FF6B35 !important; font-weight: 700 !important; background: #FFF7ED !important; }
+
+.lp-bonus-item { display: block !important; width: 100% !important; background: #fff !important; border: 2px solid #FF6B35 !important; border-radius: 8px !important; padding: clamp(1rem, 3vw, 1.5rem) !important; margin-top: 0 !important; margin-bottom: clamp(0.8rem, 2vw, 1rem) !important; box-sizing: border-box !important; }
+.lp-bonus-title { font-size: clamp(1rem, 2.5vw, 1.15rem) !important; font-weight: 700 !important; color: #FF6B35 !important; margin-top: 0 !important; margin-bottom: 0.5rem !important; display: block !important; width: 100% !important; }
+.lp-bonus-desc { font-size: clamp(0.9rem, 2.2vw, 1rem) !important; color: #666 !important; line-height: 1.7 !important; margin-top: 0 !important; margin-bottom: 0 !important; display: block !important; width: 100% !important; }
+
+.lp-guarantee-grid { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: clamp(0.8rem, 2vw, 1.2rem) !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+.lp-guarantee-card { display: block !important; width: 100% !important; background: rgba(255,255,255,0.1) !important; border: 1px solid rgba(255,255,255,0.25) !important; border-radius: 8px !important; padding: clamp(1rem, 3vw, 1.5rem) !important; text-align: center !important; color: #fff !important; box-sizing: border-box !important; }
+.lp-guarantee-icon { font-size: clamp(1.5rem, 4vw, 2rem) !important; display: block !important; margin-top: 0 !important; margin-bottom: 0.5rem !important; }
+.lp-guarantee-title { font-size: clamp(0.95rem, 2.5vw, 1.05rem) !important; font-weight: 700 !important; margin-top: 0 !important; margin-bottom: 0.3rem !important; display: block !important; width: 100% !important; }
+.lp-guarantee-desc { font-size: clamp(0.8rem, 2vw, 0.9rem) !important; color: rgba(255,255,255,0.8) !important; line-height: 1.6 !important; margin-top: 0 !important; margin-bottom: 0 !important; display: block !important; width: 100% !important; }
+
+.lp-creator { max-width: 700px !important; margin-left: auto !important; margin-right: auto !important; margin-top: 0 !important; margin-bottom: 0 !important; text-align: center !important; }
+.lp-creator-name { font-size: clamp(1.2rem, 3vw, 1.5rem) !important; font-weight: 700 !important; color: #1A3C6E !important; margin-top: clamp(0.5rem, 1.5vw, 1rem) !important; margin-bottom: 0.3rem !important; }
+.lp-creator-title { font-size: clamp(0.9rem, 2.2vw, 1rem) !important; color: #FF6B35 !important; font-weight: 700 !important; margin-top: 0 !important; margin-bottom: clamp(0.8rem, 2vw, 1rem) !important; }
+.lp-creator-bio { font-size: clamp(0.9rem, 2.2vw, 1rem) !important; color: #666 !important; line-height: 1.8 !important; text-align: left !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+
+.lp-price-box { background: rgba(255,255,255,0.1) !important; border: 2px solid rgba(255,255,255,0.25) !important; border-radius: 12px !important; padding: clamp(1.5rem, 4vw, 2.5rem) !important; text-align: center !important; max-width: 600px !important; margin-left: auto !important; margin-right: auto !important; margin-top: clamp(1rem, 3vw, 2rem) !important; margin-bottom: clamp(1rem, 3vw, 2rem) !important; }
+.lp-price-stack { font-size: clamp(0.9rem, 2.2vw, 1rem) !important; color: rgba(255,255,255,0.85) !important; line-height: 1.8 !important; margin-top: 0 !important; margin-bottom: clamp(0.5rem, 1.5vw, 1rem) !important; display: block !important; width: 100% !important; text-align: left !important; }
+
+/* --- ライトボックス（JS制御） --- */
+.lp-lb-overlay { position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(0,0,0,0.88) !important; z-index: 999999 !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; }
+.lp-lb-overlay img { max-width: 92vw !important; max-height: 92vh !important; border-radius: 8px !important; box-shadow: 0 8px 40px rgba(0,0,0,0.5) !important; cursor: default !important; }
+.lp-lb-close { position: fixed !important; top: 12px !important; right: 20px !important; font-size: 2.2rem !important; color: #fff !important; cursor: pointer !important; z-index: 1000000 !important; line-height: 1 !important; font-weight: 700 !important; text-shadow: 0 2px 8px rgba(0,0,0,0.5) !important; }
+
+/* --- チェックアイコン（価格スタック用） --- */
+.lp-chk { display: inline-block !important; width: 18px !important; height: 18px !important; background: #4CAF50 !important; color: #fff !important; border-radius: 3px !important; text-align: center !important; line-height: 18px !important; font-size: 12px !important; margin-right: 6px !important; vertical-align: middle !important; font-family: sans-serif !important; }
+
+/* --- 制作者写真 --- */
+.lp-creator-photo { display: block !important; width: 120px !important; height: 120px !important; border-radius: 50% !important; object-fit: cover !important; margin-left: auto !important; margin-right: auto !important; margin-top: 0 !important; margin-bottom: clamp(0.5rem, 1.5vw, 1rem) !important; border: 3px solid #1A3C6E !important; }
+
+/* --- 星評価（CSS文字） --- */
+.lp-stars { display: block !important; width: 100% !important; text-align: center !important; font-size: clamp(0.9rem, 2vw, 1rem) !important; color: #FFB800 !important; margin-top: 0 !important; margin-bottom: 0.2rem !important; letter-spacing: 2px !important; }
+
+@media (max-width: 768px) {
+  .lp-target-grid { grid-template-columns: 1fr !important; }
+  .lp-guarantee-grid { grid-template-columns: 1fr !important; }
+  .lp-volume-grid { grid-template-columns: 1fr 1fr !important; }
+  .lp-card-grid { grid-template-columns: 1fr !important; }
+}
+</style></head><body>
+<nav id="lp-nav"><div id="lp-nav-inner"><a class="lp-nav-brand" href="#"><span class="lp-nav-brand-badge">COURSE</span><span class="lp-nav-brand-text">補助金攻略コース</span></a><div class="lp-nav-menu"><a class="lp-nav-link" href="#sec-pain" data-section="sec-pain">悩み</a><a class="lp-nav-link" href="#sec-belief" data-section="sec-belief">考え方</a><a class="lp-nav-link" href="#sec-features" data-section="sec-features">コース内容</a><a class="lp-nav-link" href="#sec-steps" data-section="sec-steps">使い方</a><a class="lp-nav-link" href="#sec-guarantee" data-section="sec-guarantee">保証</a><a class="lp-nav-link" href="#sec-creator" data-section="sec-creator">制作者</a><a class="lp-nav-link" href="#sec-price" data-section="sec-price">価格</a></div></div><div id="lp-nav-progress"></div></nav>
+<div class="lp-wrap" style="padding-top:50px;">
+
+<!-- セクション1: ヒーロー -->
+<div class="lp-section lp-bg-navy" style="padding-top:clamp(3rem,7vw,5rem)!important;padding-bottom:clamp(3rem,7vw,5rem)!important;">
+  <div class="lp-inner">
+    <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:0!important;margin-bottom:clamp(0.5rem,1.5vw,0.8rem)!important;font-size:clamp(0.9rem,2.5vw,1.1rem)!important;color:rgba(255,255,255,0.7)!important;letter-spacing:0.1em!important;">持続化補助金 × ものづくり補助金 完全攻略オンラインコース</p>
+    <p class="lp-hero-catch" style="display:block!important;width:100%!important;">動画40本超 ＋ AIプロンプト5本 ＋<br>テンプレート集 ＋ ものづくり申請キット<br>これ全部で <span style="color:#FF6B35!important;">29,800円</span></p>
+    <p class="lp-hero-sub" style="display:block!important;width:100%!important;">補助金の基礎知識から審査対策、電子申請の操作方法まで動画で完全解説。<br>さらに5つのAIプロンプトが市場調査・SWOT分析・計画書作成・審査採点を自動化。<br>ものづくり補助金の申請キットまで丸ごとセットにしました。</p>
+    <p class="lp-hero-price" style="display:block!important;width:100%!important;">
+      <span class="lp-price-original">動画講座＋AIプロンプト＋テンプレート＋申請キット 合計785,600円相当</span>
+    </p>
+    <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:0!important;margin-bottom:0!important;">
+      <span class="lp-price-main">29,800</span><span style="font-size:clamp(1rem,3vw,1.3rem)!important;color:#FF6B35!important;font-weight:700!important;">円（税込）</span>
+    </p>
+    <p class="lp-price-note" style="display:block!important;width:100%!important;">買い切り・何度でも使える・30日間全額返金保証</p>
+    <p class="lp-cta-wrap" style="display:block!important;width:100%!important;">
+      <a href="#order-form" class="lp-cta-btn">今すぐコースを手に入れる</a>
+    </p>
+  </div>
+</div>
+
+<div id="sec-pain"></div>
+<!-- セクション2: ペインポイント -->
+<div class="lp-section lp-bg-gray">
+  <div class="lp-inner">
+    <p class="lp-heading lp-heading-navy" style="display:block!important;width:100%!important;">こんなお悩みはありませんか？</p>
+    <div class="lp-divider"></div>
+    <div class="lp-pain-list">
+      <p class="lp-pain-item" style="display:block!important;width:100%!important;">持続化補助金の存在は知っているけど、事業計画書の書き方がわからない</p>
+      <p class="lp-pain-item" style="display:block!important;width:100%!important;">行政書士やコンサルに頼むと10〜20万円。補助金が通っても利益が減ってしまう</p>
+      <p class="lp-pain-item" style="display:block!important;width:100%!important;">自分で書いてみたが「具体性が足りない」「数値根拠が弱い」と言われて不採択になった</p>
+      <p class="lp-pain-item" style="display:block!important;width:100%!important;">市場データや統計を自分で集める方法がわからない。説得力のある計画書にならない</p>
+      <p class="lp-pain-item" style="display:block!important;width:100%!important;">商工会議所に相談に行っても「もう少し具体的に」と言われるだけで、結局何を直せばいいかわからない</p>
+    </div>
+  </div>
+</div>
+
+<!-- Belief書き換え -->
+<div id="sec-belief"></div>
+<div class="lp-section lp-bg-white">
+  <div class="lp-inner">
+    <div class="lp-belief">
+      <p class="lp-belief-old" style="display:block!important;width:100%!important;">「事業計画書は、専門家に頼まないと<br>まともなものは書けない」<br>…そう思っていませんか？</p>
+      <p style="display:block!important;width:100%!important;text-align:center!important;color:#666!important;font-size:clamp(0.9rem,2.2vw,1rem)!important;line-height:1.8!important;margin-top:0!important;margin-bottom:clamp(1rem,2vw,1.5rem)!important;">自分で書いてみたけど不採択だった。商工会議所に聞いても「もう少し具体的に」と言われるだけ。<br>周りの採択された人は「コンサルに頼んだ」と言っていた。<br>だから、専門家に頼まないとダメなんだ…と。</p>
+      <p class="lp-belief-turn" style="display:block!important;width:100%!important;">実は、違います。</p>
+      <p class="lp-belief-new" style="display:block!important;width:100%!important;">計画書が書けなかったのは、専門知識がなかったからではありません。<br><strong style="color:#1A3C6E!important;">「何を、どの順番で書けばいいか」を引き出してくれるガイドがなかっただけです。</strong></p>
+      <p style="display:block!important;width:100%!important;text-align:center!important;color:#666!important;font-size:clamp(0.9rem,2.2vw,1rem)!important;line-height:1.8!important;margin-top:0!important;margin-bottom:0!important;">審査項目は公開されています。計画書に必要な情報は、事業主であるあなたの頭の中にある。<br>市場データはAIがWeb検索で自動収集できる。審査基準に沿って文章を組み立てれば、プロに匹敵する計画書になる。<br>その仕組みを、5つのAIプロンプトにまとめました。</p>
+    </div>
+  </div>
+</div>
+
+<div id="sec-target"></div>
+<!-- セクション3: こんな方におすすめ -->
+<div class="lp-section lp-bg-gray">
+  <div class="lp-inner">
+    <p class="lp-heading lp-heading-navy" style="display:block!important;width:100%!important;">こんな方におすすめです</p>
+    <div class="lp-divider"></div>
+    <div class="lp-target-grid">
+      <div class="lp-target-card">
+        <p style="display:block!important;width:100%!important;margin-top:0!important;margin-bottom:0!important;font-size:clamp(0.95rem,2.5vw,1.05rem)!important;line-height:1.7!important;">持続化補助金を申請したいが<br>事業計画書の書き方がわからない<br>小規模事業者の方</p>
+      </div>
+      <div class="lp-target-card">
+        <p style="display:block!important;width:100%!important;margin-top:0!important;margin-bottom:0!important;font-size:clamp(0.95rem,2.5vw,1.05rem)!important;line-height:1.7!important;">行政書士やコンサルへの<br>10〜20万円の費用を<br>抑えたい方</p>
+      </div>
+      <div class="lp-target-card">
+        <p style="display:block!important;width:100%!important;margin-top:0!important;margin-bottom:0!important;font-size:clamp(0.95rem,2.5vw,1.05rem)!important;line-height:1.7!important;">過去に自分で書いて<br>不採択になった経験があり<br>改善したい方</p>
+      </div>
+      <div class="lp-target-card">
+        <p style="display:block!important;width:100%!important;margin-top:0!important;margin-bottom:0!important;font-size:clamp(0.95rem,2.5vw,1.05rem)!important;line-height:1.7!important;">次回以降の申請でも<br>繰り返し使えるツールを<br>手に入れたい方</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="sec-steps"></div>
+<!-- セクション4: 使い方 -->
+<div class="lp-section lp-bg-white">
+  <div class="lp-inner">
+    <p class="lp-heading lp-heading-navy" style="display:block!important;width:100%!important;">かんたん3ステップ</p>
+    <div class="lp-divider"></div>
+    <div class="lp-steps">
+      <div class="lp-step">
+        <p style="display:block!important;width:100%!important;margin-top:0!important;margin-bottom:0.5rem!important;"><span class="lp-step-num">STEP 1</span></p>
+        <p class="lp-step-title" style="display:block!important;width:100%!important;">ZIPを展開してClaude Codeで読み込む</p>
+        <p class="lp-step-desc" style="display:block!important;width:100%!important;">届いたZIPファイルを展開するだけ。セットアップは15分で完了します。プログラミング知識は一切不要。5つのプロンプトがすぐに使える状態になります。</p>
+      </div>
+      <div class="lp-step">
+        <p style="display:block!important;width:100%!important;margin-top:0!important;margin-bottom:0.5rem!important;"><span class="lp-step-num">STEP 2</span></p>
+        <p class="lp-step-title" style="display:block!important;width:100%!important;">AIの15の質問に答える</p>
+        <p class="lp-step-desc" style="display:block!important;width:100%!important;">事業内容、強み、顧客、やりたいことを順番に聞かれるので答えるだけ。各質問に回答例が表示されるので「何を答えればいいかわからない」がありません。市場調査やSWOT分析はAIが自動で実行します。</p>
+      </div>
+      <div class="lp-step">
+        <p style="display:block!important;width:100%!important;margin-top:0!important;margin-bottom:0.5rem!important;"><span class="lp-step-num">STEP 3</span></p>
+        <p class="lp-step-title" style="display:block!important;width:100%!important;">計画書完成 → 100点満点で採点 → 改善 → 申請</p>
+        <p class="lp-step-desc" style="display:block!important;width:100%!important;">様式2・様式3のテキストが自動生成されます。審査シミュレーションで5軸×20点=100点満点で採点。弱い箇所をBefore/After形式で改善提案。75点以上になるまで何度でも改善→再採点のループを回せます。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="sec-features"></div>
+<!-- セクション5: コース内容 — ボリュームカウンター -->
+<div class="lp-section lp-bg-gray">
+  <div class="lp-inner">
+    <p class="lp-heading lp-heading-navy" style="display:block!important;width:100%!important;">補助金攻略コースに含まれるもの</p>
+    <div class="lp-divider"></div>
+    <p style="display:block!important;width:100%!important;text-align:center!important;font-size:clamp(0.95rem,2.5vw,1.1rem)!important;color:#666!important;line-height:1.8!important;margin-top:0!important;margin-bottom:0!important;">以下すべてが <strong style="color:#FF6B35!important;font-size:clamp(1.1rem,3vw,1.3rem)!important;">29,800円</strong> に含まれています。</p>
+
+    <!-- ボリュームカウンター -->
+    <div class="lp-volume-grid">
+      <div class="lp-volume-card">
+        <p class="lp-volume-num" style="display:block!important;width:100%!important;">40<span style="font-size:0.5em!important;">本超</span></p>
+        <p class="lp-volume-unit" style="display:block!important;width:100%!important;">動画講座</p>
+      </div>
+      <div class="lp-volume-card">
+        <p class="lp-volume-num" style="display:block!important;width:100%!important;">5<span style="font-size:0.5em!important;">本</span></p>
+        <p class="lp-volume-unit" style="display:block!important;width:100%!important;">AIプロンプト</p>
+      </div>
+      <div class="lp-volume-card">
+        <p class="lp-volume-num" style="display:block!important;width:100%!important;">10<span style="font-size:0.5em!important;">種超</span></p>
+        <p class="lp-volume-unit" style="display:block!important;width:100%!important;">テンプレート</p>
+      </div>
+      <div class="lp-volume-card">
+        <p class="lp-volume-num" style="display:block!important;width:100%!important;">2<span style="font-size:0.5em!important;">種</span></p>
+        <p class="lp-volume-unit" style="display:block!important;width:100%!important;">補助金対応</p>
+      </div>
+    </div>
+
+    <!-- コース内容一覧（リッチ版） -->
+    <div style="display:block!important;width:100%!important;max-width:700px!important;margin-left:auto!important;margin-right:auto!important;margin-top:clamp(1.5rem,3vw,2rem)!important;margin-bottom:clamp(1.5rem,3vw,2rem)!important;background:#fff!important;border-radius:12px!important;overflow:hidden!important;box-shadow:0 4px 20px rgba(0,0,0,0.08)!important;">
+      <div style="display:block!important;width:100%!important;background:#1A3C6E!important;padding:clamp(0.8rem,2vw,1rem) clamp(1rem,3vw,1.5rem)!important;">
+        <p style="display:block!important;width:100%!important;margin:0!important;color:#fff!important;font-size:clamp(0.95rem,2.5vw,1.1rem)!important;font-weight:700!important;text-align:center!important;">コース内容一覧 ― 合計 785,600円相当</p>
+      </div>
+      <div style="display:block!important;width:100%!important;padding:clamp(1rem,3vw,1.5rem)!important;">
+
+        <!-- 動画講座 -->
+        <div style="display:flex!important;align-items:center!important;justify-content:space-between!important;margin:0 0 0.5rem 0!important;padding:0.6rem 0.8rem!important;background:#E8F0FE!important;border-left:4px solid #1A3C6E!important;border-radius:0 6px 6px 0!important;">
+          <p style="display:block!important;margin:0!important;font-weight:700!important;font-size:clamp(0.9rem,2.2vw,1rem)!important;color:#1A3C6E!important;">動画講座 全5章</p>
+          <p style="display:block!important;margin:0!important;font-size:clamp(0.75rem,1.8vw,0.85rem)!important;"><span style="display:inline-block!important;background:#1A3C6E!important;color:#fff!important;padding:2px 8px!important;border-radius:4px!important;font-weight:700!important;margin-right:4px!important;">40本超</span><span style="color:#FF6B35!important;font-weight:700!important;">198,000円</span></p>
+        </div>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">第1章 持続化補助金の概要（7本）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">第2章 申請前の確認事項（4本）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">第3章 審査の観点と加点（3本）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">第4章 電子申請・提出書類（5本）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">第5章 事業計画の作成（12本）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.8rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">イントロ・ChatGPT講座・テンプレート活用動画（5本以上）</p>
+
+        <!-- AIプロンプト -->
+        <div style="display:flex!important;align-items:center!important;justify-content:space-between!important;margin:0 0 0.5rem 0!important;padding:0.6rem 0.8rem!important;background:#FFF3E8!important;border-left:4px solid #FF6B35!important;border-radius:0 6px 6px 0!important;">
+          <p style="display:block!important;margin:0!important;font-weight:700!important;font-size:clamp(0.9rem,2.2vw,1rem)!important;color:#FF6B35!important;">AIプロンプト</p>
+          <p style="display:block!important;margin:0!important;font-size:clamp(0.75rem,1.8vw,0.85rem)!important;"><span style="display:inline-block!important;background:#FF6B35!important;color:#fff!important;padding:2px 8px!important;border-radius:4px!important;font-weight:700!important;margin-right:4px!important;">5本</span><span style="color:#FF6B35!important;font-weight:700!important;">399,000円</span></p>
+        </div>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">1. ヒアリング整理（79,800円相当）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">2. 市場・顧客・競合調査（79,800円相当）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">3. SWOT分析（79,800円相当）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">4. 事業計画書作成（79,800円相当）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.8rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">5. 審査シミュレーション（79,800円相当）</p>
+
+        <!-- ツール・テンプレート -->
+        <div style="display:flex!important;align-items:center!important;justify-content:space-between!important;margin:0 0 0.5rem 0!important;padding:0.6rem 0.8rem!important;background:#E8F5E9!important;border-left:4px solid #4CAF50!important;border-radius:0 6px 6px 0!important;">
+          <p style="display:block!important;margin:0!important;font-weight:700!important;font-size:clamp(0.9rem,2.2vw,1rem)!important;color:#2E7D32!important;">ツール・テンプレート・申請キット</p>
+          <p style="display:block!important;margin:0!important;font-size:clamp(0.75rem,1.8vw,0.85rem)!important;"><span style="color:#2E7D32!important;font-weight:700!important;">177,600円</span></p>
+        </div>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">スキルパッケージ（29,800円相当）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">各種テンプレート集（49,800円相当）</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.8rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">ものづくり補助金 申請キット（98,000円相当）</p>
+
+        <!-- 特典 -->
+        <div style="display:flex!important;align-items:center!important;justify-content:space-between!important;margin:0 0 0.5rem 0!important;padding:0.6rem 0.8rem!important;background:#FFF8E1!important;border-left:4px solid #F9A825!important;border-radius:0 6px 6px 0!important;">
+          <p style="display:block!important;margin:0!important;font-weight:700!important;font-size:clamp(0.9rem,2.2vw,1rem)!important;color:#F57F17!important;">3大特典</p>
+          <p style="display:block!important;margin:0!important;font-size:clamp(0.75rem,1.8vw,0.85rem)!important;"><span style="color:#F57F17!important;font-weight:700!important;">11,000円</span></p>
+        </div>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">採択事例データベース</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0.2rem 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">審査チェックポイント解説書</p>
+        <p style="display:block!important;width:100%!important;margin:0 0 0!important;padding:0.2rem 0.8rem 0.2rem 1.5rem!important;font-size:clamp(0.8rem,2vw,0.88rem)!important;color:#555!important;line-height:1.6!important;">電子申請操作マニュアル</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 動画講座セクション -->
+<div class="lp-section lp-bg-white">
+  <div class="lp-inner">
+    <div class="lp-cat">
+      <div class="lp-cat-header">
+        <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:0!important;margin-bottom:0.3rem!important;"><span class="lp-cat-label">CONTENTS 1</span></p>
+        <p class="lp-cat-name" style="display:block!important;width:100%!important;">動画講座 全5章・40本以上</p>
+        <p class="lp-stars" style="display:block!important;width:100%!important;">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <p class="lp-cat-value" style="display:block!important;width:100%!important;">198,000円相当</p>
+        <p class="lp-cat-sub" style="display:block!important;width:100%!important;">補助金の基礎から計画書の書き方、電子申請まで。<br>動画を見るだけで「何をすればいいか」が全部わかります。</p>
+      </div>
+      <div class="lp-card-grid">
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-blue" style="display:block!important;width:100%!important;"><span class="lp-card-icon">CH.1</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">7本収録</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">第1章：持続化補助金の概要</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">補助金とは何か、期待できること、挫折ポイント、新制度の全体像、補助金と助成金の違いまで。「何から始めればいい？」がこの章で解消します。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-green" style="display:block!important;width:100%!important;"><span class="lp-card-icon">CH.2</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">4本収録</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">第2章：申請前の確認事項</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">申請要件・補助対象経費・特別枠を解説。「自分は対象？」「何に使える？」をクリアにし、要件ミスによる不採択を防ぎます。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-purple" style="display:block!important;width:100%!important;"><span class="lp-card-icon">CH.3</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">3本収録</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">第3章：審査の観点と加点</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">審査員がどこを見ているか、何が加点されるかを徹底解説。従業員数のカウント方法など、間違えやすいポイントも網羅。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-blue" style="display:block!important;width:100%!important;"><span class="lp-card-icon">CH.4</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">5本収録</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">第4章：電子申請・提出書類</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">GビズID取得からJグランツの操作まで画面を見せながら解説。申請状況確認、変更承認の流れまでカバー。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-orange" style="display:block!important;width:100%!important;"><span class="lp-card-icon">CH.5</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">12本収録</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">第5章：事業計画の作成</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">計画書の最重要パート。顧客ニーズ・市場動向、自社の強み、経営方針、補助事業計画（販路開拓・業務効率化）、効果、SWOT分析まで1本ずつ丁寧に解説。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-green" style="display:block!important;width:100%!important;"><span class="lp-card-icon">EXTRA</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">5本以上</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">イントロ・AI講座・勉強会</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">ChatGPT講座、構成テンプレート解説、GPT活用動画、テンプレート活用勉強会アーカイブなどのイントロ動画も収録。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AIプロンプトセクション -->
+<div class="lp-section lp-bg-lightnavy">
+  <div class="lp-inner">
+    <div class="lp-cat">
+      <div class="lp-cat-header">
+        <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:0!important;margin-bottom:0.3rem!important;"><span class="lp-cat-label lp-cat-label-orange">CONTENTS 2</span></p>
+        <p class="lp-cat-name" style="display:block!important;width:100%!important;">AIプロンプト 5本</p>
+        <p class="lp-stars" style="display:block!important;width:100%!important;">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <p class="lp-cat-value" style="display:block!important;width:100%!important;">各79,800円 = 399,000円相当</p>
+        <p class="lp-cat-sub" style="display:block!important;width:100%!important;">動画で学んだ知識をAIが実行。質問に答えるだけで<br>計画書のテキストが自動生成されます。</p>
+      </div>
+      <div class="lp-card-grid">
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-blue" style="display:block!important;width:100%!important;"><span class="lp-card-icon">AI 1</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">79,800円相当</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">1. ヒアリング整理</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">15項目の構造化質問に答えるだけ。各質問に3つの回答例が表示されるので「何を答えればいいかわからない」がありません。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-green" style="display:block!important;width:100%!important;"><span class="lp-card-icon">AI 2</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">79,800円相当</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">2. 市場・顧客・競合調査</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">AIがリアルタイムWeb検索で市場規模・顧客ニーズ・競合動向を自動収集。すべて出典付きで計画書に即使えます。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-purple" style="display:block!important;width:100%!important;"><span class="lp-card-icon">AI 3</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">79,800円相当</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">3. SWOT分析</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">強み・弱み・機会・脅威を整理し、クロスSWOT分析まで自動実行。「なぜ今この事業か」を論理的に説明できます。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-orange" style="display:block!important;width:100%!important;"><span class="lp-card-icon">AI 4</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">79,800円相当</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">4. 事業計画書作成</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">様式2・様式3のテキストを段階的に生成。補助事業の概要、実現可能性、収支試算まで審査官が見る全セクションを網羅。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-blue" style="display:block!important;width:100%!important;"><span class="lp-card-icon">AI 5</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">79,800円相当</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">5. 審査シミュレーション</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">5軸×20点＝100点満点で採点。弱い箇所にBefore/After形式で修正案を提示。75点以上を目指して何度でも改善できます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- スキル＋テンプレート＋ものづくりキット -->
+<div class="lp-section lp-bg-white">
+  <div class="lp-inner">
+    <div class="lp-cat">
+      <div class="lp-cat-header">
+        <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:0!important;margin-bottom:0.3rem!important;"><span class="lp-cat-label">CONTENTS 3</span></p>
+        <p class="lp-cat-name" style="display:block!important;width:100%!important;">ツール・テンプレート・申請キット</p>
+        <p class="lp-stars" style="display:block!important;width:100%!important;">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <p class="lp-cat-value" style="display:block!important;width:100%!important;">177,600円相当</p>
+      </div>
+      <div class="lp-card-grid">
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-purple" style="display:block!important;width:100%!important;"><span class="lp-card-icon">SKILL</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">29,800円相当</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">スキルパッケージ</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">5本のプロンプトをワンストップ連携。「ヒアリングから始めて」と一言伝えるだけで正しい順番で自動起動。コピペ不要。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-green" style="display:block!important;width:100%!important;"><span class="lp-card-icon">TPL</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">49,800円相当</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">各種テンプレート集</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">事業計画書テンプレート、参考様式、ヒアリングシートなど。穴埋め形式で「白紙から書く」プレッシャーがなくなります。2024年2月最新版追加済み。</p>
+          </div>
+        </div>
+        <div class="lp-card">
+          <p class="lp-card-preview lp-card-preview-orange" style="display:block!important;width:100%!important;"><span class="lp-card-icon">MFG</span></p>
+          <div class="lp-card-body">
+            <p class="lp-card-count" style="display:block!important;">98,000円相当</p>
+            <p class="lp-card-name" style="display:block!important;width:100%!important;">ものづくり補助金 申請キット</p>
+            <p class="lp-card-desc" style="display:block!important;width:100%!important;">持続化補助金だけじゃない。解説動画・事業計画アウトライン・パートナーシップ構築宣言・セキュリティアクション・採択後ガイドブック・参考様式集など丸ごとパッケージ。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 特典セクション -->
+<div class="lp-section lp-bg-gray">
+  <div class="lp-inner">
+    <div class="lp-cat">
+      <div class="lp-cat-header">
+        <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:0!important;margin-bottom:0.3rem!important;"><span class="lp-cat-label lp-cat-label-orange">BONUS</span></p>
+        <p class="lp-cat-name" style="display:block!important;width:100%!important;">3大特典</p>
+        <p class="lp-stars" style="display:block!important;width:100%!important;">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <p class="lp-cat-value" style="display:block!important;width:100%!important;">11,000円相当</p>
+      </div>
+      <div class="lp-features">
+        <div class="lp-bonus-item">
+          <p class="lp-bonus-title" style="display:block!important;width:100%!important;">【特典1】持続化補助金 採択事例データベース（5,000円相当）</p>
+          <p class="lp-bonus-desc" style="display:block!important;width:100%!important;">過去の採択事例を業種別（飲食・小売・サービス・建設・製造等）に整理。各事例の「取り組み内容」「経費の使い方」「採択のポイント」を解説。自分の事業に近いケースを参考にできます。</p>
+        </div>
+        <div class="lp-bonus-item">
+          <p class="lp-bonus-title" style="display:block!important;width:100%!important;">【特典2】審査員が見る5つのチェックポイント解説書（3,000円相当）</p>
+          <p class="lp-bonus-desc" style="display:block!important;width:100%!important;">審査基準5項目をOK例・NG例のBefore/After比較つきで解説。加点項目（経営力向上計画・賃上げ等）の活用ガイドも収録。</p>
+        </div>
+        <div class="lp-bonus-item">
+          <p class="lp-bonus-title" style="display:block!important;width:100%!important;">【特典3】電子申請（Jグランツ）操作マニュアル（3,000円相当）</p>
+          <p class="lp-bonus-desc" style="display:block!important;width:100%!important;">GビズID取得からJグランツ操作まで画面キャプチャつきで解説。添付書類のファイル形式や最終チェックリストも収録。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="sec-guarantee"></div>
+<!-- セクション6: 安心の3つの保証 -->
+<div class="lp-section lp-bg-navy">
+  <div class="lp-inner">
+    <p class="lp-heading lp-heading-white" style="display:block!important;width:100%!important;">安心の3つの保証</p>
+    <div class="lp-divider"></div>
+    <div class="lp-guarantee-grid">
+      <div class="lp-guarantee-card">
+        <p class="lp-guarantee-title" style="display:block!important;width:100%!important;">30日間全額返金保証</p>
+        <p class="lp-guarantee-desc" style="display:block!important;width:100%!important;">購入後30日以内にご満足いただけなければ、理由を問わず全額返金いたします。メール1通で手続き完了です。</p>
+      </div>
+      <div class="lp-guarantee-card">
+        <p class="lp-guarantee-title" style="display:block!important;width:100%!important;">メールサポート</p>
+        <p class="lp-guarantee-desc" style="display:block!important;width:100%!important;">セットアップや操作でわからないことがあれば、メールでサポートいたします。お気軽にご質問ください。</p>
+      </div>
+      <div class="lp-guarantee-card">
+        <p class="lp-guarantee-title" style="display:block!important;width:100%!important;">永久アップデート</p>
+        <p class="lp-guarantee-desc" style="display:block!important;width:100%!important;">補助金制度の変更や審査基準の更新に合わせて、プロンプトを無料アップデート。追加費用は一切かかりません。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="sec-creator"></div>
+<!-- セクション7: 制作者紹介 -->
+<div class="lp-section lp-bg-white">
+  <div class="lp-inner">
+    <p class="lp-heading lp-heading-navy" style="display:block!important;width:100%!important;">制作者</p>
+    <div class="lp-divider"></div>
+    <div class="lp-creator">
+      <img class="lp-creator-photo" src="https://raw.githubusercontent.com/WellConsultant/hojokin-lp-assets/main/profile_akutsu.png" alt="阿久津 和宏">
+      <p class="lp-creator-name" style="display:block!important;width:100%!important;">阿久津 和宏</p>
+      <p class="lp-creator-title" style="display:block!important;width:100%!important;">Well Consultant合同会社 代表</p>
+      <p class="lp-creator-bio" style="display:block!important;width:100%!important;">小規模事業者の経営支援に携わる中で、「補助金を取りたいけど計画書が書けない」という声を数多く聞いてきました。行政書士に頼めば10〜20万円。自分で書いても「具体性が足りない」と不採択。この構造的な課題を、AIの力で解決したいと考え、補助金攻略コースを開発しました。</p>
+      <p class="lp-creator-bio" style="display:block!important;width:100%!important;margin-top:1rem!important;">5つのAIプロンプトは、持続化補助金の審査基準・採択事例・計画書の構成パターンを徹底的に研究し、「事業主の方が質問に答えるだけで審査基準を満たす計画書が完成する」仕組みに仕上げています。</p>
+    </div>
+  </div>
+</div>
+
+<div id="sec-price"></div>
+<!-- セクション8: CTA最終 -->
+<div class="lp-section lp-bg-navy" style="padding-top:clamp(3rem,7vw,5rem)!important;padding-bottom:clamp(3rem,7vw,5rem)!important;">
+  <div class="lp-inner">
+    <p class="lp-heading lp-heading-white" style="display:block!important;width:100%!important;">今すぐ特別価格で手に入れてください！</p>
+    <div class="lp-divider"></div>
+    <div class="lp-price-box">
+      <p style="display:block!important;width:100%!important;text-align:center!important;font-size:clamp(1rem,2.5vw,1.15rem)!important;font-weight:700!important;color:#FF6B35!important;margin-top:0!important;margin-bottom:clamp(0.8rem,2vw,1rem)!important;">動画講座（全5章・40本以上）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> 第1章 持続化補助金の概要 — 7本</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> 第2章 申請前の確認事項 — 4本</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> 第3章 審査の観点と加点 — 3本</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> 第4章 電子申請・提出書類 — 5本</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> 第5章 事業計画の作成 — 12本</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> イントロ・ChatGPT講座・テンプレート活用動画 — 5本以上</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;font-weight:700!important;color:#fff!important;">小計：198,000円相当</p>
+
+      <p style="display:block!important;width:100%!important;text-align:center!important;font-size:clamp(1rem,2.5vw,1.15rem)!important;font-weight:700!important;color:#FF6B35!important;margin-top:clamp(1rem,2vw,1.5rem)!important;margin-bottom:clamp(0.8rem,2vw,1rem)!important;">AIプロンプト 5本</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> プロンプト1 ヒアリング整理 — 15項目の構造化質問（79,800円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> プロンプト2 市場・顧客・競合調査 — 出典付き自動収集（79,800円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> プロンプト3 SWOT分析 — クロスSWOT＋戦略方向性（79,800円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> プロンプト4 事業計画書作成 — 様式2・様式3＋収支試算（79,800円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> プロンプト5 審査シミュレーション — 5軸100点満点＋改善提案（79,800円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;font-weight:700!important;color:#fff!important;">小計：399,000円相当</p>
+
+      <p style="display:block!important;width:100%!important;text-align:center!important;font-size:clamp(1rem,2.5vw,1.15rem)!important;font-weight:700!important;color:#FF6B35!important;margin-top:clamp(1rem,2vw,1.5rem)!important;margin-bottom:clamp(0.8rem,2vw,1rem)!important;">ツール・テンプレート・申請キット</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> スキルパッケージ — 5本を統合ワンストップ連携（29,800円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> 各種テンプレート集 — 記入式の計画書テンプレート一式（49,800円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> ものづくり補助金申請キット — 動画＋テンプレート＋採択後ガイド（98,000円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;font-weight:700!important;color:#fff!important;">小計：177,600円相当</p>
+
+      <p style="display:block!important;width:100%!important;text-align:center!important;font-size:clamp(1rem,2.5vw,1.15rem)!important;font-weight:700!important;color:#FF6B35!important;margin-top:clamp(1rem,2vw,1.5rem)!important;margin-bottom:clamp(0.8rem,2vw,1rem)!important;">3大特典</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> 特典1 採択事例データベース（5,000円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> 特典2 審査チェックポイント解説書（3,000円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;"><span class="lp-chk">&#10003;</span> 特典3 電子申請操作マニュアル（3,000円相当）</p>
+      <p class="lp-price-stack" style="display:block!important;width:100%!important;font-weight:700!important;color:#fff!important;">小計：11,000円相当</p>
+
+      <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:clamp(1.5rem,3vw,2rem)!important;margin-bottom:0.5rem!important;font-size:clamp(0.95rem,2.5vw,1.1rem)!important;color:rgba(255,255,255,0.85)!important;font-weight:700!important;">動画40本以上 ＋ AIプロンプト5本 ＋ テンプレート集 ＋ ものづくり申請キット ＋ 特典3つ</p>
+      <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:0!important;margin-bottom:0.5rem!important;font-size:clamp(0.9rem,2.2vw,1rem)!important;color:rgba(255,255,255,0.7)!important;">合計 785,600円相当が…</p>
+      <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:0!important;margin-bottom:0!important;">
+        <span class="lp-price-original">合計 785,600円相当</span>
+      </p>
+      <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:0.3rem!important;margin-bottom:0!important;">
+        <span class="lp-price-main">29,800</span><span style="font-size:clamp(1rem,3vw,1.3rem)!important;color:#FF6B35!important;font-weight:700!important;">円（税込）</span>
+      </p>
+      <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:0.5rem!important;margin-bottom:0!important;font-size:clamp(0.8rem,2vw,0.9rem)!important;color:rgba(255,255,255,0.7)!important;">買い切り・何度でも使える</p>
+    </div>
+    <p style="display:block!important;width:100%!important;text-align:center!important;color:rgba(255,255,255,0.85)!important;font-size:clamp(0.9rem,2.2vw,1rem)!important;line-height:1.8!important;margin-top:0!important;margin-bottom:clamp(1rem,2vw,1.5rem)!important;">行政書士に申請代行を依頼すれば着手金だけで5〜15万円。それでも計画書の中身はあなたから聞いた話をまとめるだけ。このコースなら、動画で知識を身につけ、AIプロンプトで計画書を自動生成し、審査シミュレーションで採点・改善まで完結。しかも何度でも使えます。</p>
+    <p class="lp-cta-wrap" style="display:block!important;width:100%!important;">
+      <a href="https://www.funnel-build.com/hkcourse" class="lp-cta-btn">29,800円でコースを手に入れる</a>
+    </p>
+    <p style="display:block!important;width:100%!important;text-align:center!important;margin-top:1rem!important;margin-bottom:0!important;font-size:clamp(0.8rem,2vw,0.9rem)!important;color:rgba(255,255,255,0.6)!important;">30日間全額返金保証つき・メールサポートあり</p>
+  </div>
+</div>
+
+<div id="order-form"></div>
+<!-- セクション9: フッター -->
+<div class="lp-section" style="background:#0F2847!important;padding:clamp(1.5rem,3vw,2rem) 0!important;">
+  <div class="lp-inner">
+    <p style="display:block!important;width:100%!important;text-align:center!important;margin:0 0 0.8rem 0!important;font-size:clamp(0.8rem,2vw,0.9rem)!important;color:rgba(255,255,255,0.5)!important;line-height:1.8!important;">
+      <a href="#" onclick="document.getElementById('lp-privacy-modal').style.display='flex';return false;" style="color:rgba(255,255,255,0.6)!important;text-decoration:underline!important;">プライバシーポリシー</a>
+      <span style="margin:0 0.8rem!important;">|</span>
+      <a href="#" onclick="document.getElementById('lp-tokusho-modal').style.display='flex';return false;" style="color:rgba(255,255,255,0.6)!important;text-decoration:underline!important;">特定商取引法に基づく表記</a>
+    </p>
+    <p style="display:block!important;width:100%!important;text-align:center!important;margin:0 0 0.5rem 0!important;font-size:clamp(0.75rem,1.8vw,0.85rem)!important;color:rgba(255,255,255,0.4)!important;">Well Consultant合同会社</p>
+    <p style="display:block!important;width:100%!important;text-align:center!important;margin:0!important;font-size:clamp(0.7rem,1.6vw,0.8rem)!important;color:rgba(255,255,255,0.3)!important;">Copyright &copy; 2025 Well Consultant LLC. All rights reserved.</p>
+  </div>
+</div>
+
+<!-- プライバシーポリシー モーダル -->
+<div id="lp-privacy-modal" style="display:none!important;position:fixed!important;top:0!important;left:0!important;width:100%!important;height:100%!important;background:rgba(0,0,0,0.7)!important;z-index:999999!important;align-items:center!important;justify-content:center!important;" onclick="this.style.display='none';">
+  <div style="background:#fff!important;max-width:700px!important;width:90%!important;max-height:80vh!important;overflow-y:auto!important;border-radius:12px!important;padding:clamp(1.5rem,4vw,2.5rem)!important;position:relative!important;" onclick="event.stopPropagation();">
+    <span style="position:absolute!important;top:12px!important;right:16px!important;font-size:1.5rem!important;cursor:pointer!important;color:#999!important;line-height:1!important;" onclick="document.getElementById('lp-privacy-modal').style.display='none';">&times;</span>
+    <p style="font-size:clamp(1.1rem,3vw,1.3rem)!important;font-weight:700!important;color:#1A3C6E!important;margin:0 0 1rem 0!important;">プライバシーポリシー</p>
+    <p style="font-size:clamp(0.85rem,2vw,0.95rem)!important;color:#555!important;line-height:1.8!important;margin:0 0 0.8rem 0!important;">Well Consultant合同会社（以下「当社」）は、お客様の個人情報の保護を重要な責務と認識し、以下のとおり個人情報保護方針を定め、適切な管理・保護に努めます。</p>
+    <p style="font-size:clamp(0.9rem,2.2vw,1rem)!important;font-weight:700!important;color:#1A3C6E!important;margin:0 0 0.3rem 0!important;">1. 個人情報の取得</p>
+    <p style="font-size:clamp(0.85rem,2vw,0.95rem)!important;color:#555!important;line-height:1.8!important;margin:0 0 0.8rem 0!important;">当社は、商品の販売・サービスの提供に必要な範囲で、お名前、メールアドレス、お支払い情報等の個人情報を適正に取得いたします。</p>
+    <p style="font-size:clamp(0.9rem,2.2vw,1rem)!important;font-weight:700!important;color:#1A3C6E!important;margin:0 0 0.3rem 0!important;">2. 利用目的</p>
+    <p style="font-size:clamp(0.85rem,2vw,0.95rem)!important;color:#555!important;line-height:1.8!important;margin:0 0 0.8rem 0!important;">商品・サービスの提供およびアフターサポート、ご注文内容の確認・決済処理、新商品・キャンペーン等のご案内（メール配信を含む）、お問い合わせへの対応、サービス改善のための統計分析（個人を特定しない形式）。</p>
+    <p style="font-size:clamp(0.9rem,2.2vw,1rem)!important;font-weight:700!important;color:#1A3C6E!important;margin:0 0 0.3rem 0!important;">3. 第三者への提供</p>
+    <p style="font-size:clamp(0.85rem,2vw,0.95rem)!important;color:#555!important;line-height:1.8!important;margin:0 0 0.8rem 0!important;">法令に基づく場合を除き、お客様の同意なく個人情報を第三者に提供することはありません。ただし、決済処理に必要な範囲で決済代行会社に情報を提供する場合があります。</p>
+    <p style="font-size:clamp(0.9rem,2.2vw,1rem)!important;font-weight:700!important;color:#1A3C6E!important;margin:0 0 0.3rem 0!important;">4. お問い合わせ</p>
+    <p style="font-size:clamp(0.85rem,2vw,0.95rem)!important;color:#555!important;line-height:1.8!important;margin:0 0 0!important;">個人情報に関するお問い合わせは下記までお願いいたします。<br>Well Consultant合同会社<br>メール：info@fp-1.info</p>
+  </div>
+</div>
+
+<!-- 特定商取引法に基づく表記 モーダル -->
+<div id="lp-tokusho-modal" style="display:none!important;position:fixed!important;top:0!important;left:0!important;width:100%!important;height:100%!important;background:rgba(0,0,0,0.7)!important;z-index:999999!important;align-items:center!important;justify-content:center!important;" onclick="this.style.display='none';">
+  <div style="background:#fff!important;max-width:700px!important;width:90%!important;max-height:80vh!important;overflow-y:auto!important;border-radius:12px!important;padding:clamp(1.5rem,4vw,2.5rem)!important;position:relative!important;" onclick="event.stopPropagation();">
+    <span style="position:absolute!important;top:12px!important;right:16px!important;font-size:1.5rem!important;cursor:pointer!important;color:#999!important;line-height:1!important;" onclick="document.getElementById('lp-tokusho-modal').style.display='none';">&times;</span>
+    <p style="font-size:clamp(1.1rem,3vw,1.3rem)!important;font-weight:700!important;color:#1A3C6E!important;margin:0 0 1rem 0!important;">特定商取引法に基づく表記</p>
+    <p style="font-size:clamp(0.85rem,2vw,0.95rem)!important;color:#555!important;line-height:2!important;margin:0 0 0!important;">
+      <strong>販売事業者：</strong>Well Consultant合同会社<br>
+      <strong>代表者：</strong>阿久津 和宏<br>
+      <strong>所在地：</strong>埼玉県熊谷市石原641-3<br>
+      <strong>電話番号：</strong>050-3707-3507<br>
+      <strong>メールアドレス：</strong>info@fp-1.info<br>
+      <strong>販売価格：</strong>29,800円（税込）<br>
+      <strong>支払方法：</strong>クレジットカード<br>
+      <strong>商品の引き渡し時期：</strong>決済完了後、即時ダウンロード可能<br>
+      <strong>返品・返金：</strong>購入後30日以内であれば、理由を問わず全額返金いたします。info@fp-1.info までご連絡ください。<br>
+      <strong>動作環境：</strong>Claude Code（Anthropic社）が動作するPC環境が必要です。
+    </p>
+  </div>
+</div>
+</div>
+<script>
+(function(){var nav=document.getElementById("lp-nav");var navLinks=document.querySelectorAll(".lp-nav-link");var progressBar=document.getElementById("lp-nav-progress");var sections=[];navLinks.forEach(function(link){var id=link.getAttribute("data-section");var el=document.getElementById(id);if(el)sections.push({id:id,el:el,nav:link});});document.querySelectorAll('#lp-nav a[href^="#"]').forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();var id=this.getAttribute("href").substring(1);var target=document.getElementById(id);if(target){var navH=nav.offsetHeight;var top=target.getBoundingClientRect().top+window.pageYOffset-navH;window.scrollTo({top:top,behavior:"smooth"});}});});function onScroll(){var scrollY=window.pageYOffset;var docH=document.documentElement.scrollHeight-window.innerHeight;var progress=docH>0?(scrollY/docH)*100:0;progressBar.style.width=Math.min(progress,100)+"%";var current=null;for(var i=0;i<sections.length;i++){if(sections[i].el.offsetTop<=scrollY+nav.offsetHeight+80){current=sections[i];}}navLinks.forEach(function(l){l.classList.remove("active");});if(current)current.nav.classList.add("active");}window.addEventListener("scroll",onScroll,{passive:true});onScroll();})();
+document.querySelectorAll('a[href="#order-form"]').forEach(function(a){a.addEventListener("click",function(e){e.preventDefault();window.scrollTo({top:document.documentElement.scrollHeight,behavior:"smooth"});});});
+</script>
+</body></html>
