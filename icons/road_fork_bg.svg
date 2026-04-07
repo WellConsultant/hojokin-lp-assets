@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E8EDF4" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#E8EDF4" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+  <!-- Main road from bottom center -->
+  <path d="M480 600 L480 350" stroke="#C5D0DE" stroke-width="40" fill="none" stroke-linecap="round" opacity="0.2"/>
+  <!-- Left fork -->
+  <path d="M480 350 Q400 280 250 180" stroke="#C5D0DE" stroke-width="30" fill="none" stroke-linecap="round" opacity="0.15"/>
+  <!-- Center fork -->
+  <path d="M480 350 Q480 250 480 100" stroke="#C5D0DE" stroke-width="30" fill="none" stroke-linecap="round" opacity="0.15"/>
+  <!-- Right fork -->
+  <path d="M480 350 Q560 280 710 180" stroke="#C5D0DE" stroke-width="30" fill="none" stroke-linecap="round" opacity="0.15"/>
+  <!-- Dashed center lines -->
+  <path d="M480 600 L480 360" stroke="#B0BEC5" stroke-width="3" fill="none" stroke-dasharray="12,8" opacity="0.15"/>
+  <path d="M480 350 Q400 280 250 180" stroke="#B0BEC5" stroke-width="2" fill="none" stroke-dasharray="10,8" opacity="0.1"/>
+  <path d="M480 350 Q480 250 480 100" stroke="#B0BEC5" stroke-width="2" fill="none" stroke-dasharray="10,8" opacity="0.1"/>
+  <path d="M480 350 Q560 280 710 180" stroke="#B0BEC5" stroke-width="2" fill="none" stroke-dasharray="10,8" opacity="0.1"/>
+</svg>
