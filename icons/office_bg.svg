@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+  <!-- Desk surface -->
+  <rect x="0" y="380" width="960" height="220" fill="#D4C8B8" opacity="0.08"/>
+  <line x1="0" y1="380" x2="960" y2="380" stroke="#B8A898" stroke-width="1" opacity="0.12"/>
+  <!-- Window frame left -->
+  <rect x="80" y="40" width="240" height="300" rx="3" fill="none" stroke="#B0BEC5" stroke-width="2" opacity="0.1"/>
+  <line x1="200" y1="40" x2="200" y2="340" stroke="#B0BEC5" stroke-width="1.5" opacity="0.08"/>
+  <line x1="80" y1="190" x2="320" y2="190" stroke="#B0BEC5" stroke-width="1.5" opacity="0.08"/>
+  <!-- Window frame right -->
+  <rect x="640" y="40" width="240" height="300" rx="3" fill="none" stroke="#B0BEC5" stroke-width="2" opacity="0.1"/>
+  <line x1="760" y1="40" x2="760" y2="340" stroke="#B0BEC5" stroke-width="1.5" opacity="0.08"/>
+  <line x1="640" y1="190" x2="880" y2="190" stroke="#B0BEC5" stroke-width="1.5" opacity="0.08"/>
+  <!-- Bookshelf hint right side -->
+  <rect x="820" y="360" width="100" height="15" rx="2" fill="#C5D0DE" opacity="0.08"/>
+  <rect x="830" y="345" width="15" height="15" rx="1" fill="#B0BEC5" opacity="0.06"/>
+  <rect x="850" y="340" width="12" height="20" rx="1" fill="#A0B0C0" opacity="0.06"/>
+  <rect x="868" y="343" width="14" height="17" rx="1" fill="#B8C8D8" opacity="0.06"/>
+  <!-- Laptop hint on desk -->
+  <rect x="400" y="400" width="160" height="100" rx="4" fill="none" stroke="#B0BEC5" stroke-width="1.5" opacity="0.07"/>
+  <rect x="380" y="500" width="200" height="8" rx="3" fill="#C5D0DE" opacity="0.06"/>
+  <!-- Coffee cup -->
+  <circle cx="620" cy="440" r="18" fill="none" stroke="#C5D0DE" stroke-width="1.5" opacity="0.08"/>
+  <path d="M638 435 Q650 435 650 445 Q650 455 638 455" fill="none" stroke="#C5D0DE" stroke-width="1" opacity="0.06"/>
+  <!-- Pen holder -->
+  <rect x="140" y="410" width="25" height="40" rx="3" fill="none" stroke="#B0BEC5" stroke-width="1" opacity="0.07"/>
+  <line x1="148" y1="410" x2="145" y2="390" stroke="#B0BEC5" stroke-width="1" opacity="0.06"/>
+  <line x1="155" y1="410" x2="158" y2="388" stroke="#B0BEC5" stroke-width="1" opacity="0.06"/>
+</svg>
